@@ -26,7 +26,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						Categories
+						카테고리
 					</h4>
 
 					<ul>
@@ -50,7 +50,7 @@
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								시계
+								악세서리
 							</a>
 						</li>
 					</ul>
@@ -62,21 +62,11 @@
 					</h4>
 
 					<ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Track Order
-							</a>
-						</li>
+						
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Returns 
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Shipping
+								환불관련
 							</a>
 						</li>
 
@@ -94,7 +84,7 @@
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						질문이 있으신가요? 경기도 양주시 덕계동 현진에버빌 205동 1103호 입니다. 문의 전화번호 010-3634-6774
+						질문이 있으신가요? 경기도 양주시 덕계동 현진에버빌 205동 1103호 입니다. 문의 전화 : 010-3634-6774
 					</p>
 
 					<div class="p-t-27">

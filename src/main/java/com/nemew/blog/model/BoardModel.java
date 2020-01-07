@@ -24,12 +24,22 @@ public class BoardModel {
 	public String reg_date;	//등록날짜
 	public String imgYn;	//이미지존재여부
 	public String price;	//상품가격
+	public String category;	//카테고리 분류
+	
 	
 	//Shop Detail 테이블
-	public String img_cnt;
-	public String img_url;
+	public String img_cnt; //이미지 갯수
+	public String img_url;	//이미지 url
+	public String division;	//대소분류 구분
 	
 	
+	
+	public String getDivision() {
+		return division;
+	}
+	public void setDivision(String division) {
+		this.division = division;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -95,6 +105,12 @@ public class BoardModel {
 	}
 	public void setPrice(String price) {
 		this.price = price;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

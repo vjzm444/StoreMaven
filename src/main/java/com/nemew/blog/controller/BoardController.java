@@ -53,7 +53,13 @@ public class BoardController {
 	//user main페이지
 	@GetMapping("/")// URL 주소
 	public String userMain(HttpServletRequest request,HttpServletResponse response) throws Throwable {
-	
+		
+		BoardModel boardVO = new BoardModel();
+
+		//상품 기본정보
+		List<BoardModel> board = boardService.BoardList(boardVO);
+		
+		request.setAttribute("imgBicList", board);
 		return userPass+"shopMain"; 
 	}
 	
@@ -69,25 +75,31 @@ public class BoardController {
 	public String productDetail(HttpServletRequest request,HttpServletResponse response, Model model) throws Throwable {
 		
 		BoardModel boardVO = new BoardModel();
-		boardVO.setUp_seq("00001");
-
-		BoardModel board = boardService.BoardList(boardVO);
+		boardVO.setUp_seq("00001"); 
+		
+		//상품 기본정보
+		List<BoardModel> board = boardService.BoardList(boardVO);
+		
 		
 		//대분류 이미지 조회
-		List<BoardModel> imgBicList = boardService.imgDetailBicList(boardVO);
-		System.out.println("대분류 이미지 사이즈 ="+imgBicList.size());
-		
+		boardVO.setDivision("D"); 
+		List<BoardModel> imgBicList = boardService.imgDetailList(boardVO);
+
 		//소분류 이미지 조회
+		boardVO.setDivision("S"); 
 		List<BoardModel> imgList = boardService.imgDetailList(boardVO);
-		System.out.println("소분류 이미지 사이즈 ="+imgList.size());
 		
 		request.setAttribute("imgBicList", imgBicList);
 		request.setAttribute("imgList", imgList);
+		
 
+		request.setAttribute("board", board);
+		
+		/*
 		model.addAttribute("title", board.getTitle());
 		model.addAttribute("content", board.getContent());
 		model.addAttribute("price", board.getPrice());
-		
+		*/	
 		return userPass+"product-detail"; 
 	}
 	

@@ -16,7 +16,7 @@ import com.nemew.blog.model.BoardModel;
 public interface BoardService {
 	
 	//다중건 조회
-	public BoardModel BoardList(BoardModel boardVO) throws Exception;
+	public List<BoardModel> BoardList(BoardModel boardVO) throws Exception;
 	//소분류이미지
 	public List<BoardModel> imgDetailList(BoardModel boardVO) throws Exception;
 	//대분류이미지

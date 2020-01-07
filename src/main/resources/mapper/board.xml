@@ -14,49 +14,47 @@
 		<result property="reg_date" column="REG_DATE" />
 		<result property="imgYn" column="IMGYN" />
 		<result property="price" column="PRICE" />
-	</resultMap>
-	
-	<resultMap id="detailStore" type="com.nemew.blog.model.BoardModel">
+		<result property="category" column="CATEGORY" />
 		<result property="img_url" column="IMG_URL" />
 	</resultMap>
 	
-
+	<resultMap id="detailStore" type="com.nemew.blog.model.BoardModel">
+		<result property="id" column="ID" />
+		<result property="up_seq" column="UP_SEQ" />
+		<result property="img_cnt" column="IMG_CNT" />
+		<result property="img_url" column="IMG_URL" />
+		<result property="division" column="DIVISION" />
+		<result property="reg_date" column="REG_DATE" />
+	</resultMap>
 	
 
 	
+
 	
 	<!-- 전체게시물 조회 -->
 	<select id="BoardList" resultMap="mainStore">
-			SELECT * FROM shop
+			select s.*, d.img_url from shop s, shop_detail d
+			where s.up_seq = d.up_seq
+			and d.img_cnt = '1'
+			and d.division ='D'
 				<if test="up_seq != null and up_seq != '' ">
 					<![CDATA[ 
-					where up_seq= #{up_seq}
+					and s.up_seq= #{up_seq}
 					]]>
 				</if>
+			order by up_seq asc
 	</select>
 	
 	
-	<!-- 대분류 상세이미지 리스트 조회 -->
-	<select id="imgDetailBicList" resultMap="detailStore">
-		SELECT img_url FROM shop_detail
-			<if test="up_seq != null and up_seq != '' ">
-				<![CDATA[ 
-				
-				where up_seq= #{up_seq}
-				and division = 'D'
-				]]>
-			</if>
-		order by id asc
-	</select>
 	
 	<!-- 상세이미지 리스트 조회 -->
 	<select id="imgDetailList" resultMap="detailStore">
-		SELECT img_url FROM shop_detail
+		SELECT * FROM shop_detail
 			<if test="up_seq != null and up_seq != '' ">
 				<![CDATA[ 
 				
 				where up_seq= #{up_seq}
-				and division = 'S'
+				and division = #{division}
 				]]>
 			</if>
 		order by id asc

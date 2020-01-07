@@ -15,7 +15,7 @@ import com.nemew.blog.service.BoardService;
 public interface BoardDao {
 	
 	//게시판 조회
-	BoardModel BoardList(BoardModel boardVO);
+	List<BoardModel> BoardList(BoardModel boardVO);
 	//소분류이미지
 	List<BoardModel> imgDetailList(BoardModel boardVO);
 	//대분류이미지

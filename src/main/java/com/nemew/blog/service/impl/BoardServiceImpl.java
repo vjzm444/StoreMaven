@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 
 	//다중건 조회
 	@Override
-	public BoardModel BoardList(BoardModel boardVO) throws Exception{
+	public List<BoardModel> BoardList(BoardModel boardVO) throws Exception{
 		return dao.BoardList(boardVO);
 	}
 	

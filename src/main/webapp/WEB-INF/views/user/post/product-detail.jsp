@@ -87,13 +87,18 @@
 					
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
+						
+  			
+  			<c:forEach var="list" items="${board}">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-							${title}
+							${list.title}
 						</h4>
 
 						<span class="mtext-106 cl2">
-							쿠폰적용가 ${price}
+							쿠폰적용가 ${list.price}
 						</span>
+			</c:forEach>
+
 
 						<p class="stext-102 cl3 p-t-23">
 							상품 할인쿠폰을 적용하면 최대 1,800원 할인 받을 수 있어요!
@@ -196,36 +201,24 @@
 						
 					<div class="p-t-32">
 							
+						<c:forEach var="list" items="${board}">
 							<p class="stext-117 cl6 p-b-26">
-								${content}
+								${list.content}
 							</p>
+		  				</c:forEach>
 
 
-           <c:forEach var="list" items="${imgList}">
-						<div class="wrap-pic-w how-pos5-parent">
-							<img src="${list.img_url}" alt="IMG-BLOG">
-						</div>
-						<br>
-  			</c:forEach>
+			           <c:forEach var="list" items="${imgList}">
+							<div class="wrap-pic-w how-pos5-parent">
+								<img src="${list.img_url}" alt="IMG-BLOG">
+							</div><br>
+							
+			  			</c:forEach>
+  			
 					</div>
 
 
-					<!-- 글 밑에 태그 Bar -->
-						<div class="flex-w flex-t p-t-16">
-							<span class="size-216 stext-116 cl8 p-t-4">
-								Tags
-							</span>
-
-							<div class="flex-w size-217">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									스타일리쉬
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									캐쥬얼
-								</a>
-							</div>
-						</div>
+					
 
 						<!-- 코멘트 란 -->
 						<div class="p-t-40">
@@ -307,64 +300,7 @@
 							</ul>
 						</div>
 
-						<div class="p-t-65">
-							<h4 class="mtext-112 cl2 p-b-33">
-								Featured Products
-							</h4>
-
-							<ul>
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="user/images/product-min-01.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											White Shirt With Pleat Detail Back
-										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$19.00
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="user/images/product-min-02.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="user/images/product-min-03.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$17.00
-										</span>
-									</div>
-								</li>
-							</ul>
-						</div>
-
-						
-
+				
 						<div class="p-t-50">
 							<h4 class="mtext-112 cl2 p-b-27">
 								Tags
