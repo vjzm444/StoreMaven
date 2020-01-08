@@ -24,21 +24,43 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired 
 	BoardDao dao;
 
-	//다중건 조회
+	//상품정보 조회(상세포함)
 	@Override
 	public List<BoardModel> BoardList(BoardModel boardVO) throws Exception{
 		return dao.BoardList(boardVO);
 	}
 	
+	//다중 이미지 조회
 	@Override
 	public List<BoardModel> imgDetailList(BoardModel boardVO) throws Exception{
 		return dao.imgDetailList(boardVO);
 	}
 	
+	//장바구니
 	@Override
-	public List<BoardModel> imgDetailBicList(BoardModel boardVO) throws Exception{
-		return dao.imgDetailBicList(boardVO);
+	public List<BoardModel> cartList(BoardModel boardVO) throws Exception{
+		return dao.cartList(boardVO);
 	}
 	
+	//등록을 위한 max key번호 조회
+	@Override
+	public int maxIdNum() {
+		int result = dao.maxIdNum();
+		
+		return result;
+	}
+	
+	//게시물 등록
+	@Override
+	public boolean cartInsertPost(BoardModel vo) throws Exception {		
+		boolean result = true;
+
+		try {
+			dao.cartInsertPost(vo);
+		}catch (Exception e) {
+			result = false;
+		}
+		return result; 
+	}
 	
 }

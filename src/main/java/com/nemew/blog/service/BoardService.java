@@ -15,11 +15,16 @@ import com.nemew.blog.model.BoardModel;
 
 public interface BoardService {
 	
-	//다중건 조회
+	//상품정보 조회(상세포함)
 	public List<BoardModel> BoardList(BoardModel boardVO) throws Exception;
-	//소분류이미지
-	public List<BoardModel> imgDetailList(BoardModel boardVO) throws Exception;
-	//대분류이미지
-	public List<BoardModel> imgDetailBicList(BoardModel boardVO) throws Exception;
 	
+	//다중 이미지 조회
+	public List<BoardModel> imgDetailList(BoardModel boardVO) throws Exception;
+
+	public List<BoardModel> cartList(BoardModel boardVO) throws Exception;
+	
+	public int maxIdNum();
+	
+	//게시물 업데이트
+	public boolean cartInsertPost(BoardModel vo) throws Exception;
 }

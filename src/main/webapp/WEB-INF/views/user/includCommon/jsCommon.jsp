@@ -93,14 +93,70 @@
 		});
 
 		/*---------------------------------------------*/
-
+		
+		//장바구니 넣기
 		$('.js-addcart-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+
+			
+			
 			$(this).on('click', function(){
+	
+				var up_seq = document.getElementById("up_seq").value;
+				var num = document.getElementById("num-product").value;
+
+				//사이즈
+				var s = document.getElementById("optionSize");
+				var optionSize = s.options[s.selectedIndex].value;
+	
+				//컬러
+				var c = document.getElementById("optionColer");
+				var optionColer = c.options[c.selectedIndex].value;
+	
+				if(optionSize == '' || optionColer == ''){
+					alert('옵션을 선택해주세요');
+					return
+				}	
+				
+				//장바구니 업로드
+				uploadAjax(optionSize, optionColer, up_seq, num)
+			
 				swal(nameProduct, "is added to cart !", "success");
 			});
 		});
-	
+
+
+		//게시물 글짜 등록 시작~~~
+		function uploadAjax(optionSize, optionColer, up_seq, num){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			
+		    //장바구니 업로드
+			$.ajax({
+		      url: "/cartUploadProcess.do",
+		      dataType: 'json',
+		      type: "POST",
+		      data: {
+		    	  size : optionSize,
+		    	  color : optionColer,
+		    	  up_seq: up_seq,
+		    	  cnt : num
+		      },
+		      cache: false,
+		      success: function() {
+		        // Success message
+			  	console.log('success cart upload');
+		      },
+		      error: function() {
+		    	  alert('장바구니 upload 실패');
+		    	  return
+		      }
+		    });
+		    
+		}
+
+
+
+		
 	</script>
 <!--===============================================================================================-->
 	<script src="user/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>

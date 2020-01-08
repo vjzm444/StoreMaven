@@ -5,7 +5,7 @@ package com.nemew.blog.model;
  * @Date : 2019. 12. 24. 
  * @작성자 : song
  * @변경이력 : 
- * @프로그램 설명 : 매핑되는 db컬럼 및 페이징처리
+ * @프로그램 설명 : 매핑되는 DB컬럼
  */
 import java.util.Date;
 
@@ -25,12 +25,18 @@ public class BoardModel {
 	public String imgYn;	//이미지존재여부
 	public String price;	//상품가격
 	public String category;	//카테고리 분류
-	
+	public String recommend;	// 추천여부
 	
 	//Shop Detail 테이블
 	public String img_cnt; //이미지 갯수
 	public String img_url;	//이미지 url
 	public String division;	//대소분류 구분
+	
+	
+	//장바구니
+	public String size;		//상품 사이즈
+	public String color;	//상품색상
+	public String cnt;	//상품색상
 	
 	
 	
@@ -111,6 +117,30 @@ public class BoardModel {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public String getRecommend() {
+		return recommend;
+	}
+	public void setRecommend(String recommend) {
+		this.recommend = recommend;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getCnt() {
+		return cnt;
+	}
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
 	}
 	
 	

@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Product Detail</title>
+	<title>상품 상세페이지</title>
 	<meta charset="euc-kr">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 공통 css를 가져온다===============================================================================================-->	
@@ -97,6 +97,9 @@
 						<span class="mtext-106 cl2">
 							쿠폰적용가 ${list.price}
 						</span>
+						
+						<input type="hidden" id = "up_seq" name="up_seq" value="${list.up_seq}"/>
+									
 			</c:forEach>
 
 
@@ -113,12 +116,12 @@
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>옵션선택</option>
-											<option>Size S</option>
-											<option>Size M</option>
-											<option>Size L</option>
-											<option>Size XL</option>
+										<select class="js-select2" name="optionSize" id="optionSize" value="">
+											<option value="">옵션선택</option>
+											<option value="S">Size S</option>
+											<option value="M">Size M</option>
+											<option value="L">Size L</option>
+											<option value="XL">Size XL</option>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
@@ -132,12 +135,12 @@
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>옵션선택</option>
-											<option>Red</option>
-											<option>Blue</option>
-											<option>White</option>
-											<option>Grey</option>
+										<select class="js-select2" name="optionColer" id="optionColer" value="">
+											<option value="">옵션선택</option>
+											<option value="Red">Red</option>
+											<option value="Blue">Blue</option>
+											<option value="White">White</option>
+											<option value="Grey">Grey</option>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
@@ -151,16 +154,21 @@
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" id="num-product" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
-
+									
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
+										장바구니
 									</button>
+									
+									
+									
+									
+									
 								</div>
 							</div>	
 						</div>
@@ -362,5 +370,10 @@
 
 <!--공통 js 로딩 ===============================================================================================-->	
 <%@ include file="/WEB-INF/views/user/includCommon/jsCommon.jsp" %> 
+
+
+
+
+
 </body>
 </html>

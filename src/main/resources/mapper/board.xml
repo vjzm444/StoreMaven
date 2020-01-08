@@ -5,7 +5,7 @@
 <mapper namespace="com.nemew.blog.dao.BoardDao">
 
 
-	<resultMap id="mainStore" type="com.nemew.blog.model.BoardModel">
+	<resultMap id="mainStoreMap" type="com.nemew.blog.model.BoardModel">
 		<result property="id" column="ID" />
 		<result property="up_seq" column="UP_SEQ" />
 		<result property="title" column="TITLE" />
@@ -15,10 +15,11 @@
 		<result property="imgYn" column="IMGYN" />
 		<result property="price" column="PRICE" />
 		<result property="category" column="CATEGORY" />
+		<result property="recommend" column="RECOMMEND" />
 		<result property="img_url" column="IMG_URL" />
 	</resultMap>
 	
-	<resultMap id="detailStore" type="com.nemew.blog.model.BoardModel">
+	<resultMap id="detailStoreMap" type="com.nemew.blog.model.BoardModel">
 		<result property="id" column="ID" />
 		<result property="up_seq" column="UP_SEQ" />
 		<result property="img_cnt" column="IMG_CNT" />
@@ -27,12 +28,20 @@
 		<result property="reg_date" column="REG_DATE" />
 	</resultMap>
 	
-
+	<resultMap id="cartListMap" type="com.nemew.blog.model.BoardModel">
+		<result property="id" column="ID" />
+		<result property="up_seq" column="UP_SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="price" column="PRICE" />
+		<result property="img_url" column="IMG_URL" />
+		<result property="size" column="SIZE" />
+		<result property="color" column="COLOR" />
+	</resultMap>
 	
 
 	
-	<!-- 전체게시물 조회 -->
-	<select id="BoardList" resultMap="mainStore">
+	<!-- 전체게시물 조회 / 개별 상품정보 조회 -->
+	<select id="BoardList" resultMap="mainStoreMap">
 			select s.*, d.img_url from shop s, shop_detail d
 			where s.up_seq = d.up_seq
 			and d.img_cnt = '1'
@@ -42,13 +51,19 @@
 					and s.up_seq= #{up_seq}
 					]]>
 				</if>
+				
+				<if test="recommend != null and recommend != '' ">
+					<![CDATA[ 
+					and s.recommend= #{recommend}
+					]]>
+				</if>
+				
 			order by up_seq asc
 	</select>
 	
 	
-	
 	<!-- 상세이미지 리스트 조회 -->
-	<select id="imgDetailList" resultMap="detailStore">
+	<select id="imgDetailList" resultMap="detailStoreMap">
 		SELECT * FROM shop_detail
 			<if test="up_seq != null and up_seq != '' ">
 				<![CDATA[ 
@@ -60,6 +75,44 @@
 		order by id asc
 	</select>
 	
+	
+	<!-- 장바구니 조회 -->
+	<select id="cartList" resultMap="cartListMap">
+		select c.id, s.up_seq, s.title, s.price, d.img_url ,c.size, c.color
+		from shop s, shop_detail d, cart c
+			where s.up_seq = d.up_seq
+			and s.up_seq = c.up_seq
+			and d.img_cnt = '1'
+			and d.division ='D'
+			and c.user_id= #{user_id}
+		order by c.id desc
+	</select>
+	
+	
+	<!-- 최고 ID값 조회 -->
+	<select id="maxIdNum" resultType="int">
+			select 
+			ifnull(a.num,1) as topnum
+			from (
+				select 
+				max(id)+1 num
+				from cart
+			)a
+	</select>
+	
+	
+	<!-- 장바구니 업로드 -->
+	<insert id ="cartInsertPost">
+		insert into cart (id, up_seq, user_id, size, color, cnt, reg_date) value (
+			#{id},
+			#{up_seq},
+			#{user_id},
+			#{size},
+			#{color},
+			#{cnt},
+			#{reg_date}
+		)
+	</insert>
 	
 
 

@@ -42,41 +42,68 @@ import java.text.SimpleDateFormat;
 @Controller("BoardController")
 public class BoardController {
 	
-	
 	@Autowired
 	BoardService boardService;
 
-	String userPass = "user/post/";	//jsp폴더경로
-	String adminPass = "admin/post/";	//jsp폴더경로
-	//
+	String userPass = "user/post/";	//USER jsp경로
+	String adminPass = "admin/post/";	//ADMIN jsp경로
 	
-	//user main페이지
+	
+	//Admin main페이지
+	@GetMapping("/adminMain.do")// URL 주소
+	public String adminMain(HttpServletRequest request,HttpServletResponse response) throws Throwable {
+		
+		return adminPass+"adminMain"; 
+	}
+	
+	
+	//User main페이지
 	@GetMapping("/")// URL 주소
 	public String userMain(HttpServletRequest request,HttpServletResponse response) throws Throwable {
 		
 		BoardModel boardVO = new BoardModel();
 
-		//상품 기본정보
+		//상품 기본정보 및 1번째 배너 이미지
 		List<BoardModel> board = boardService.BoardList(boardVO);
 		
+		//현재 로그인 된 유저아이디
+		String keyId = "vjzm44";
+		//장바구니 목록 조회
+		List<BoardModel> cartList = cartSeachList(keyId);
+				
+
+		request.setAttribute("cartList", cartList);
 		request.setAttribute("imgBicList", board);
 		return userPass+"shopMain"; 
 	}
 	
-	//admin main페이지
-	@GetMapping("/adminMain.do")// URL 주소
-	public String adminMain(HttpServletRequest request,HttpServletResponse response) throws Throwable {
 	
-		return adminPass+"adminMain"; 
-	}
-	
-	//user 상품 상세페이지
+	//User 상품 상세페이지
 	@GetMapping("/productDetail.do")// URL 주소
 	public String productDetail(HttpServletRequest request,HttpServletResponse response, Model model) throws Throwable {
-		
+	
+		//게시물 고유번호
+		String selectKey = request.getParameter("up_seq");
+
 		BoardModel boardVO = new BoardModel();
-		boardVO.setUp_seq("00001"); 
+
+		//추천 상품 탭 정보
+		boardVO.setRecommend("Y"); 
+		List<BoardModel> boardRecommend = boardService.BoardList(boardVO);
 		
+		if(selectKey.equals("")||selectKey == null) {
+			selectKey = "00001";
+			System.out.println("Select Key is Null!!!!!!");
+		}
+		
+
+		//장바구니 목록 조회
+		//현재 로그인 된 유저아이디
+		String keyId = "vjzm44";
+		List<BoardModel> cartList = cartSeachList(keyId);
+		
+		boardVO.setRecommend(""); //초기화 
+		boardVO.setUp_seq(selectKey); 
 		//상품 기본정보
 		List<BoardModel> board = boardService.BoardList(boardVO);
 		
@@ -88,20 +115,77 @@ public class BoardController {
 		//소분류 이미지 조회
 		boardVO.setDivision("S"); 
 		List<BoardModel> imgList = boardService.imgDetailList(boardVO);
-		
-		request.setAttribute("imgBicList", imgBicList);
-		request.setAttribute("imgList", imgList);
-		
 
-		request.setAttribute("board", board);
+		request.setAttribute("cartList", cartList);	//장바구니
+		request.setAttribute("recommendList", boardRecommend);	//추천 상품정보
+		request.setAttribute("imgBicList", imgBicList); //대분류이미지
+		request.setAttribute("imgList", imgList);	//소분류 이미지
+		request.setAttribute("board", board);	//개별 상품정보
 		
-		/*
-		model.addAttribute("title", board.getTitle());
-		model.addAttribute("content", board.getContent());
-		model.addAttribute("price", board.getPrice());
-		*/	
 		return userPass+"product-detail"; 
 	}
+	
+	//유저가 장바구니에 넣은 목록정보
+	public List cartSeachList(String keyId) throws Exception{
+		BoardModel boardVO = new BoardModel();
+		boardVO.setUser_id(keyId); 
+		return boardService.cartList(boardVO);
+	}
+	
+	@ResponseBody    
+	@RequestMapping(value="/cartUploadProcess.do", method = RequestMethod.POST ) // URL 주소
+	public boolean cartUploadProcess(HttpServletRequest request,HttpServletResponse response) throws Throwable {	
+
+		boolean result = true;
+		
+		//String user_id = request.getParameter("user_id");
+		
+		String user_id = "vjzm44";
+		String up_seq = request.getParameter("up_seq");
+		String size = request.getParameter("size");
+		String color = request.getParameter("color");
+		String cnt = request.getParameter("cnt");
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		Date time = new Date();
+		String time1 = format1.format(time);
+		
+		System.out.println("up_seq================ "+up_seq);
+		System.out.println("size================ "+size);
+		System.out.println("color================ "+color);
+		System.out.println("time1================ "+time1);
+		
+		
+		
+		if(user_id.equals("") || user_id == null) {
+			result = false;
+		}
+		
+		//장바구니 최고 id값
+		int maxid = idNum();
+		System.out.println("select max id = "+maxid);
+		
+		BoardModel vo = new BoardModel();
+		vo.setId(maxid);
+		vo.setUser_id(user_id);
+		vo.setUp_seq(up_seq);
+		vo.setSize(size);
+		vo.setColor(color);
+		vo.setCnt(cnt);
+		vo.setReg_date(time1);
+		
+		
+		boolean res = boardService.cartInsertPost(vo);
+		
+		return result;
+	}
+	
+	 //id값 가져오기
+	public int idNum() {
+		int maxNum = boardService.maxIdNum();
+		return maxNum;
+	}
+		
 	
 
 
