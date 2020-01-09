@@ -97,9 +97,10 @@ public class BoardController {
 		}
 		
 
-		//장바구니 목록 조회
 		//현재 로그인 된 유저아이디
 		String keyId = "vjzm44";
+
+		//장바구니 목록 조회
 		List<BoardModel> cartList = cartSeachList(keyId);
 		
 		boardVO.setRecommend(""); //초기화 
@@ -125,20 +126,23 @@ public class BoardController {
 		return userPass+"product-detail"; 
 	}
 	
-	//유저가 장바구니에 넣은 목록정보
+	
+	//유저가 장바구니에 넣은 목록정보 조회
 	public List cartSeachList(String keyId) throws Exception{
+		
 		BoardModel boardVO = new BoardModel();
 		boardVO.setUser_id(keyId); 
+		
 		return boardService.cartList(boardVO);
 	}
 	
+	
+	//장바구니 등록 (ajax버젼)
 	@ResponseBody    
 	@RequestMapping(value="/cartUploadProcess.do", method = RequestMethod.POST ) // URL 주소
 	public boolean cartUploadProcess(HttpServletRequest request,HttpServletResponse response) throws Throwable {	
 
 		boolean result = true;
-		
-		//String user_id = request.getParameter("user_id");
 		
 		String user_id = "vjzm44";
 		String up_seq = request.getParameter("up_seq");
@@ -146,24 +150,17 @@ public class BoardController {
 		String color = request.getParameter("color");
 		String cnt = request.getParameter("cnt");
 		
+		//등록날짜 시간구하기
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 		Date time = new Date();
 		String time1 = format1.format(time);
-		
-		System.out.println("up_seq================ "+up_seq);
-		System.out.println("size================ "+size);
-		System.out.println("color================ "+color);
-		System.out.println("time1================ "+time1);
-		
-		
 		
 		if(user_id.equals("") || user_id == null) {
 			result = false;
 		}
 		
 		//장바구니 최고 id값
-		int maxid = idNum();
-		System.out.println("select max id = "+maxid);
+		int maxid = cartIdNum();
 		
 		BoardModel vo = new BoardModel();
 		vo.setId(maxid);
@@ -174,15 +171,15 @@ public class BoardController {
 		vo.setCnt(cnt);
 		vo.setReg_date(time1);
 		
-		
+		//장바구니 목록 추가등록
 		boolean res = boardService.cartInsertPost(vo);
 		
 		return result;
 	}
 	
-	 //id값 가져오기
-	public int idNum() {
-		int maxNum = boardService.maxIdNum();
+	//장바구니 max id값 가져오기
+	public int cartIdNum() {
+		int maxNum = boardService.cartMaxIdNum();
 		return maxNum;
 	}
 		

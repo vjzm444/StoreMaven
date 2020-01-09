@@ -30,27 +30,27 @@ public class BoardServiceImpl implements BoardService {
 		return dao.BoardList(boardVO);
 	}
 	
-	//다중 이미지 조회
+	//상품 이미지 리스트 조회
 	@Override
 	public List<BoardModel> imgDetailList(BoardModel boardVO) throws Exception{
 		return dao.imgDetailList(boardVO);
 	}
 	
-	//장바구니
+	//장바구니 목록조회
 	@Override
 	public List<BoardModel> cartList(BoardModel boardVO) throws Exception{
 		return dao.cartList(boardVO);
 	}
 	
-	//등록을 위한 max key번호 조회
+	//장바구니 글 등록을 위한 max key번호 조회
 	@Override
-	public int maxIdNum() {
-		int result = dao.maxIdNum();
+	public int cartMaxIdNum() {
+		int result = dao.cartMaxIdNum();
 		
 		return result;
 	}
 	
-	//게시물 등록
+	//장바구니 등록
 	@Override
 	public boolean cartInsertPost(BoardModel vo) throws Exception {		
 		boolean result = true;
@@ -62,5 +62,10 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return result; 
 	}
+	
+	
+	
+	
+	
 	
 }

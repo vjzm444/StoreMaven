@@ -128,7 +128,6 @@
 
 		//게시물 글짜 등록 시작~~~
 		function uploadAjax(optionSize, optionColer, up_seq, num){
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			
 		    //장바구니 업로드
 			$.ajax({

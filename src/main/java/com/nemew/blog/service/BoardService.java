@@ -18,13 +18,15 @@ public interface BoardService {
 	//상품정보 조회(상세포함)
 	public List<BoardModel> BoardList(BoardModel boardVO) throws Exception;
 	
-	//다중 이미지 조회
+	//상품이미지 리스트 조회
 	public List<BoardModel> imgDetailList(BoardModel boardVO) throws Exception;
-
+	
+	//장바구니 정보조회
 	public List<BoardModel> cartList(BoardModel boardVO) throws Exception;
 	
-	public int maxIdNum();
+	//장바구니 maxId 조회
+	public int cartMaxIdNum();
 	
-	//게시물 업데이트
+	//장바구니 상품 등록
 	public boolean cartInsertPost(BoardModel vo) throws Exception;
 }

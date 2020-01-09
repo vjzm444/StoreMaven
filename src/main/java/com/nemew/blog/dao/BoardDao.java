@@ -20,11 +20,12 @@ public interface BoardDao {
 	//다중 이미지 조회
 	List<BoardModel> imgDetailList(BoardModel boardVO);
 	
-	//장바구니
+	//장바구니 조회
 	List<BoardModel> cartList(BoardModel boardVO);
-
-	public int maxIdNum();
 	
-	//게시물 등록
+	//장바구니 max id값
+	public int cartMaxIdNum();
+	
+	//장바구니 등록
 	public boolean cartInsertPost(BoardModel vo) throws Exception;
 }

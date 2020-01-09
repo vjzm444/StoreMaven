@@ -90,7 +90,7 @@
 	
 	
 	<!-- 최고 ID값 조회 -->
-	<select id="maxIdNum" resultType="int">
+	<select id="cartMaxIdNum" resultType="int">
 			select 
 			ifnull(a.num,1) as topnum
 			from (
