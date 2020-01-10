@@ -1,4 +1,4 @@
-package com.nemew.blog.service.impl;
+package com.nemew.blog.user.service.impl;
 /**
  * @FileName : BoardServiceImpl.java
  * @Project : MavenTest
@@ -13,16 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import com.nemew.blog.dao.BoardDao;
-import com.nemew.blog.model.BoardModel;
-import com.nemew.blog.service.BoardService;
+import com.nemew.blog.user.dao.BoardDao;
+import com.nemew.blog.user.model.BoardModel;
+import com.nemew.blog.user.service.BoardService;
 
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 
-	@Autowired 
+	@Autowired
 	BoardDao dao;
+
 
 	//상품정보 조회(상세포함)
 	@Override
@@ -62,7 +63,8 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return result; 
 	}
-	
+
+    
 	
 	
 	

@@ -1,4 +1,4 @@
-package com.nemew.blog.service;
+package com.nemew.blog.user.service;
 /**
  * @FileName : BoardService.java
  * @Project : MavenTest
@@ -11,10 +11,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.nemew.blog.model.BoardModel;
+import com.nemew.blog.user.model.BoardModel;
 
 public interface BoardService {
-	
 	//상품정보 조회(상세포함)
 	public List<BoardModel> BoardList(BoardModel boardVO) throws Exception;
 	
@@ -29,4 +28,6 @@ public interface BoardService {
 	
 	//장바구니 상품 등록
 	public boolean cartInsertPost(BoardModel vo) throws Exception;
+
+	
 }

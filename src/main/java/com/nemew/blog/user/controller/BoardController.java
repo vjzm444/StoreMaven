@@ -1,4 +1,4 @@
-package com.nemew.blog.controller;
+package com.nemew.blog.user.controller;
 /**
  * @FileName : BoardController.java
  * @Project : MavenTest
@@ -33,8 +33,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.nemew.blog.model.BoardModel;
-import com.nemew.blog.service.BoardService;
+import com.nemew.blog.user.model.BoardModel;
+import com.nemew.blog.user.service.BoardService;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -45,20 +45,11 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	String userPass = "user/post/";	//USER jsp경로
-	String adminPass = "admin/post/";	//ADMIN jsp경로
-	
-	
-	//Admin main페이지
-	@GetMapping("/adminMain.do")// URL 주소
-	public String adminMain(HttpServletRequest request,HttpServletResponse response) throws Throwable {
-		
-		return adminPass+"adminMain"; 
-	}
-	
+	String userPass = "user/post/";		// 유저페이지 jsp경로
+
 	
 	//User main페이지
-	@GetMapping("/")// URL 주소
+	@GetMapping("/")
 	public String userMain(HttpServletRequest request,HttpServletResponse response) throws Throwable {
 		
 		BoardModel boardVO = new BoardModel();
@@ -100,12 +91,13 @@ public class BoardController {
 		//현재 로그인 된 유저아이디
 		String keyId = "vjzm44";
 
-		//장바구니 목록 조회
+		//유저의 장바구니 목록 조회
 		List<BoardModel> cartList = cartSeachList(keyId);
 		
 		boardVO.setRecommend(""); //초기화 
-		boardVO.setUp_seq(selectKey); 
-		//상품 기본정보
+		boardVO.setUp_seq(selectKey);
+		
+		//상품 디테일 정보
 		List<BoardModel> board = boardService.BoardList(boardVO);
 		
 		
@@ -144,7 +136,7 @@ public class BoardController {
 
 		boolean result = true;
 		
-		String user_id = "vjzm44";
+		String user_id = "vjzm44"; //로그인유저아이디
 		String up_seq = request.getParameter("up_seq");
 		String size = request.getParameter("size");
 		String color = request.getParameter("color");

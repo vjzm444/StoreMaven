@@ -1,4 +1,4 @@
-package com.nemew.blog.dao;
+package com.nemew.blog.user.dao;
 /**
  * @FileName : BoardDao.java
  * @Project : MavenTest
@@ -9,8 +9,8 @@ package com.nemew.blog.dao;
  */
 import java.util.List;
 
-import com.nemew.blog.model.BoardModel;
-import com.nemew.blog.service.BoardService;
+import com.nemew.blog.user.model.BoardModel;
+import com.nemew.blog.user.service.BoardService;
 
 public interface BoardDao {
 	
@@ -28,4 +28,6 @@ public interface BoardDao {
 	
 	//장바구니 등록
 	public boolean cartInsertPost(BoardModel vo) throws Exception;
+
+
 }

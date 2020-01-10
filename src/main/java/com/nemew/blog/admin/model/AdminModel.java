@@ -1,7 +1,7 @@
-package com.nemew.blog.model;
+package com.nemew.blog.admin.model;
 /**
- * @FileName : BoardModel.java
- * @Project : MavenTest
+ * @FileName : AdminModel.java
+ * @Project : StoreMaven
  * @Date : 2019. 12. 24. 
  * @작성자 : song
  * @변경이력 : 
@@ -11,8 +11,8 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("boardModel")
-public class BoardModel {
+@Alias("adminModel")
+public class AdminModel {
 
 	//sShop 메인 테이블
 	public int id;

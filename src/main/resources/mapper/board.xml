@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<!-- /* user page DB 조회 */ -->
+<mapper namespace="com.nemew.blog.user.dao.BoardDao">
 
-<mapper namespace="com.nemew.blog.dao.BoardDao">
 
-
-	<resultMap id="mainStoreMap" type="com.nemew.blog.model.BoardModel">
+	<resultMap id="mainStoreMap" type="com.nemew.blog.user.model.BoardModel">
 		<result property="id" column="ID" />
 		<result property="up_seq" column="UP_SEQ" />
 		<result property="title" column="TITLE" />
@@ -19,7 +20,7 @@
 		<result property="img_url" column="IMG_URL" />
 	</resultMap>
 	
-	<resultMap id="detailStoreMap" type="com.nemew.blog.model.BoardModel">
+	<resultMap id="detailStoreMap" type="com.nemew.blog.user.model.BoardModel">
 		<result property="id" column="ID" />
 		<result property="up_seq" column="UP_SEQ" />
 		<result property="img_cnt" column="IMG_CNT" />
@@ -28,7 +29,7 @@
 		<result property="reg_date" column="REG_DATE" />
 	</resultMap>
 	
-	<resultMap id="cartListMap" type="com.nemew.blog.model.BoardModel">
+	<resultMap id="cartListMap" type="com.nemew.blog.user.model.BoardModel">
 		<result property="id" column="ID" />
 		<result property="up_seq" column="UP_SEQ" />
 		<result property="title" column="TITLE" />
