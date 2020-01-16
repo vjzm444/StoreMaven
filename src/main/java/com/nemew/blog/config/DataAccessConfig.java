@@ -1,7 +1,7 @@
 package com.nemew.blog.config;
 /**
  * @FileName : DataAccessConfig.java
- * @Project : MavenTest
+ * @Project : StoreMaven
  * @Date : 2019. 12. 24. 
  * @작성자 : song
  * @변경이력 : 

@@ -1,6 +1,6 @@
 package com.nemew.blog.admin.controller;
 /**
- * @FileName : BoardController.java
+ * @FileName : AdminController.java
  * @Project : StoreMaven
  * @Date : 2019. 12. 31. 
  * @작성자 : song
@@ -50,21 +50,67 @@ public class AdminController {
 	@GetMapping("/adminMain.do")
 	public String adminMain(HttpServletRequest request,HttpServletResponse response) throws Throwable {
 		
+		request.setAttribute("shadow", "main");
 		return adminPass+"adminMain"; 
 	}
 	
 	//Admin 상품 등록 페이지
 	@GetMapping("/adminUploadPage.do")
 	public String AdminuploadPage(HttpServletRequest request,HttpServletResponse response) throws Throwable {
-			
+
+		request.setAttribute("shadow", "upload");
 		return adminPass+"upLoadForm"; 
 	}
 	
-	//테스트용
+	//db연동 테스트용
     @RequestMapping("/db2")
     public @ResponseBody String db2() throws Exception{
         return dbService.getDb2Dual();
     }
 	
-	
+    //글쓰기 등록 처리 ajax
+  	@ResponseBody    
+  	@RequestMapping(value="/admin/uploadProcess.do", method = RequestMethod.POST )
+  	public boolean uploadProcess(HttpServletRequest request, HttpServletResponse response) throws Throwable {	
+
+  		boolean result = true;
+  		
+  		String title = request.getParameter("title");
+  		String subComment = request.getParameter("subComment");
+  		String price = request.getParameter("price");
+  		String size = request.getParameter("size");
+  		String color = request.getParameter("color");
+  		String textareaComment = request.getParameter("textareaComment");
+  		String resultFilePath = request.getParameter("resultFilePath");
+  		String resultFileArrayPath = request.getParameter("resultFileArrayPath");
+  		
+
+  		System.out.println("글제목 = "+title+" /서브코멘트 = "+subComment+" /가격 ="+price+" /사이즈 = "+size+" /색깔 = "+color+" /상세설명 = "+textareaComment+" /배너이미지 = "+resultFilePath+" /상세이미지 = "+resultFileArrayPath);
+
+  		
+  		
+  		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+  		Date time = new Date();
+  		String time1 = format1.format(time);
+  		
+  		/*
+  		if(user_id.equals("") || user_id == null) {
+  			result = false;
+  		}
+  		int maxid = idNum();
+  		System.out.println("select max id = "+maxid);
+  		
+  		BoardModel vo = new BoardModel();
+  		vo.setId(maxid);
+  		vo.setUser_id(user_id);
+  		vo.setTitle(title);
+  		vo.setContent(message);
+  		vo.setPhone(phone);
+  		vo.setImg_url(img_url);
+  		vo.setReg_date(time1);
+  		
+  		boolean res = boardService.boardInsertPost(vo);
+  		*/
+  		return result;
+  	}
 }

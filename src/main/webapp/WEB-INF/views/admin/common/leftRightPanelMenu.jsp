@@ -14,6 +14,13 @@
  */ 
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+//메뉴 그림자 표시...shadow하니 비스트노래가 생각난다
+String shadow = (String)request.getAttribute("shadow");
+System.out.println("메뉴 그림자 구분 ="+shadow);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,14 +29,25 @@
 </head>
 <body>
 
+<c:set var="shadow" value="<%= shadow %>"/>
+
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>대쉬보드 </a>
+                 <c:choose>
+       				<c:when test="${shadow ==  'main' }">
+ 						<li class="active">
+                    </c:when>
+	       			<c:otherwise>
+	                    <li>
+	                </c:otherwise>
+   				</c:choose>                   
+                        
+                        <a href="/adminMain.do"><i class="menu-icon fa fa-laptop"></i>대쉬보드 </a>
                     </li>
+                    
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>컴포넌트</a>
@@ -46,7 +64,16 @@
                             <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    
+                <c:choose>
+       				<c:when test="${shadow ==  'upload' }">
+ 						<li class="menu-item-has-children active dropdown">
+                    </c:when>
+	       			<c:otherwise>
+	                    <li class="menu-item-has-children dropdown">
+	                </c:otherwise>
+   				</c:choose>                
+                    
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>상품</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-table"></i><a href="/adminUploadPage.do">상품등록</a></li>
@@ -114,8 +141,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="admin/images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="admin/images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="/adminMain.do"><img src="admin/images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="/adminMain.do"><img src="admin/images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>

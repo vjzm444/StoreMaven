@@ -1,6 +1,6 @@
 package com.nemew.blog.admin.service;
 /**
- * @FileName : BoardService.java
+ * @FileName : AdminService.java
  * @Project : StoreMaven
  * @Date : 2019. 12. 24. 
  * @작성자 : song

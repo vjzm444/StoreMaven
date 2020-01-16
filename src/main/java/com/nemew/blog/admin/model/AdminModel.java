@@ -14,7 +14,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("adminModel")
 public class AdminModel {
 
-	//sShop 메인 테이블
+	//Shop 메인 테이블
 	public int id;
 	public String up_seq;	//고유번호
 	public String user_id;	//유저아이디
@@ -25,10 +25,11 @@ public class AdminModel {
 	public String imgYn;	//이미지존재여부
 	public String price;	//상품가격
 	public String category;	//카테고리 분류
-	public String recommend;	// 추천여부
+	public String recommend;// 추천여부
+	
 	
 	//Shop Detail 테이블
-	public String img_cnt; //이미지 갯수
+	public String img_cnt;	//이미지 갯수
 	public String img_url;	//이미지 url
 	public String division;	//대소분류 구분
 	
@@ -36,7 +37,7 @@ public class AdminModel {
 	//장바구니
 	public String size;		//상품 사이즈
 	public String color;	//상품색상
-	public String cnt;	//상품색상
+	public String cnt;		//상품색상
 	
 	
 	
