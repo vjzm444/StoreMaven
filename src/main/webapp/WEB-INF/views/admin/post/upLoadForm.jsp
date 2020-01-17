@@ -268,6 +268,7 @@
 	       
 		uploadBannerOutServer(formData1,'1')
 		uploadBannerOutServer(formData2,'2')
+		uploadBannerOutServer(formData3,'3')
 	    
 		for (var i = 0; i < filesMulti.length; i++) {
 	        formData.append('image', filesMulti[i]); //멀티로 업로드한 파일을 하나하나 읽어서 FormData 안에 넣는다.
@@ -333,6 +334,7 @@
                     if (evt.lengthComputable) {              
                         console.log("업로드진행률:"+parseInt( (evt.loaded / evt.total * 100), 10)+"%");
                         //$("#file_view_list").html(parseInt( (evt.loaded / evt.total * 100), 10)+"%"); //리스트를 화면에 보여줌
+                        $("#file_view_list").html("이미지 업로드 처리중입니다. 잠시만 기다려주십시오."); //리스트를 화면에 보여줌
                     }
                 }, false);
                 return xhr;
@@ -351,6 +353,7 @@
     //최종 처리
     function resultFuc(){
 
+        $("#file_view_list").html("데이터 등록중입니다. 잠시만 기다려주십시오."); //리스트를 화면에 보여줌
         console.log('상세이미지 최종:'+ resultFileArrayPath);
 		console.log('배너이미지 최종:'+ resultFilePath);
 		
@@ -399,12 +402,14 @@
           cache: false,
           success: function() {
             // Success message
-            alert('성공!');
+            $("#file_view_list").html("글 등록을 완료하였습니다."); //리스트를 화면에 보여줌
+            alert('글 등록을 완료하였습니다.');
             return
           },
           error: function() {
             // Fail message
-            alert('실패');
+            alert('글 등록에 실패하였습니다.');
+            $("#file_view_list").html("글 등록에 실패하였습니다."); //리스트를 화면에 보여줌
             return
           }
         });

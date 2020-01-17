@@ -29,10 +29,55 @@ public class AdminServiceImpl implements AdminService {
 	public String getDb2Dual() throws Exception{
 		return dao.getDb2Dual();
 	}
-    
+
+	//메인테이블 max id값 조회
+	@Override
+	public int maxIdNum() {
+		int result = dao.maxIdNum();
+		
+		return result;
+	}
 	
+	//메인테이블 max 시퀀스번호 조회
+	@Override
+	public String maxUserSeq() {
+		String result = dao.maxUserSeq();
+			
+		return result;
+	}
+	//디테일테이블 id max값 조회
+	@Override
+	public int maxDetailId() {
+		int result = dao.maxDetailId();
+			
+		return result;
+	}
 	
+	//게시물 등록
+	@Override
+	public boolean adminInsertPost(AdminModel vo) throws Exception {		
+		boolean result = true;
+		
+		try {
+			dao.adminInsertPost(vo);
+		}catch (Exception e) {
+			result = false;
+		}
+		return result; 
+	}
 	
+	//게시물 이미지 등록
+	@Override
+	public boolean adminInsertImg(AdminModel vo) throws Exception {		
+		boolean result = true;
+		
+		try {
+			dao.adminInsertImg(vo);
+		}catch (Exception e) {
+			result = false;
+		}
+		return result; 
+	}
 	
 	
 }

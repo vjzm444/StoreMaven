@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.nemew.blog.admin.model.AdminModel;
 import com.nemew.blog.admin.service.AdminService;
 
 import java.io.*;
@@ -42,7 +43,7 @@ import java.text.SimpleDateFormat;
 public class AdminController {
 	
 	@Autowired
-	AdminService dbService;
+	AdminService adminService;
 
 	String adminPass = "admin/post/";	// 관리자페이지 jsp경로
 	
@@ -65,7 +66,7 @@ public class AdminController {
 	//db연동 테스트용
     @RequestMapping("/db2")
     public @ResponseBody String db2() throws Exception{
-        return dbService.getDb2Dual();
+        return adminService.getDb2Dual();
     }
 	
     //글쓰기 등록 처리 ajax
@@ -81,36 +82,61 @@ public class AdminController {
   		String size = request.getParameter("size");
   		String color = request.getParameter("color");
   		String textareaComment = request.getParameter("textareaComment");
+  		
+  		//배열값
   		String resultFilePath = request.getParameter("resultFilePath");
   		String resultFileArrayPath = request.getParameter("resultFileArrayPath");
   		
-
   		System.out.println("글제목 = "+title+" /서브코멘트 = "+subComment+" /가격 ="+price+" /사이즈 = "+size+" /색깔 = "+color+" /상세설명 = "+textareaComment+" /배너이미지 = "+resultFilePath+" /상세이미지 = "+resultFileArrayPath);
 
-  		
-  		
   		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
   		Date time = new Date();
-  		String time1 = format1.format(time);
+  		String time1 = format1.format(time); //현재시간
   		
-  		/*
-  		if(user_id.equals("") || user_id == null) {
-  			result = false;
+  		try {
+	  		int maxid = adminService.maxIdNum();	//max id 구하기
+	  		System.out.println("maxid = "+maxid);
+	  		String maxUsrSep = adminService.maxUserSeq();	//max 시퀀스 구하기
+	  		System.out.println("maxUsrSep = "+maxUsrSep);
+	  		
+	  		AdminModel vo = new AdminModel();
+	  		vo.setId(maxid);
+	  		vo.setUp_seq(maxUsrSep);
+	  		vo.setTitle(title);
+	  		vo.setContent(textareaComment);
+	  		vo.setPrice(price);
+	  		vo.setReg_date(time1);
+	  		
+	  		//게시글 올리기
+	  		boolean res = adminService.adminInsertPost(vo);
+	  		
+			String[] array1 = resultFilePath.split(","); 		//배너 이미지
+	  		String[] array2 = resultFileArrayPath.split(",");	//상세 이미지
+	  		
+	  		//이미지 리스트들 처리시작
+	  		for(int i=0;i<array1.length;i++) {
+	  	  		int maxDetailId = adminService.maxDetailId(); //배너이미지 최고 id 구하기
+	  	  		vo.setId(maxDetailId);
+	  	  		vo.setImg_cnt_v2(i+1);
+	  	  		vo.setImg_url(array1[i]);
+	  	  		vo.setDivision("D");
+	  	  		boolean res1 = adminService.adminInsertImg(vo);
+	  		}
+	
+	  		for(int i=0;i<array2.length;i++) {
+	  	  		int maxDetailId = adminService.maxDetailId(); //배너이미지 최고 id 구하기
+	  	  		vo.setId(maxDetailId);
+	  	  		vo.setImg_cnt_v2(i+1);
+	  	  		vo.setImg_url(array2[i]);
+	  	  		vo.setDivision("S");
+	  	  		boolean res1 = adminService.adminInsertImg(vo);
+	  		}
+  		}catch(Exception e) {
+  	  		System.out.println("admin insert error!!! = "+e);
+  	  		result = false;
   		}
-  		int maxid = idNum();
-  		System.out.println("select max id = "+maxid);
-  		
-  		BoardModel vo = new BoardModel();
-  		vo.setId(maxid);
-  		vo.setUser_id(user_id);
-  		vo.setTitle(title);
-  		vo.setContent(message);
-  		vo.setPhone(phone);
-  		vo.setImg_url(img_url);
-  		vo.setReg_date(time1);
-  		
-  		boolean res = boardService.boardInsertPost(vo);
-  		*/
   		return result;
   	}
+
+
 }

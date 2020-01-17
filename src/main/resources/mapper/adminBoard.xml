@@ -9,6 +9,71 @@
 	<select id="getDb2Dual" resultType="java.lang.String">
 		SELECT 'DB2' FROM DUAL
 	</select>
-
+	
+	<!-- max id check -->
+	<select id="maxIdNum" resultType="int">
+			select 
+			ifnull(a.num,1) as topnum
+			from (
+				select 
+				max(id)+1 num
+				from shop
+			)a
+	</select>
+	
+	<!-- maxDetailId -->
+	<select id="maxDetailId" resultType="int">
+			select 
+			ifnull(a.num,1) as topnum
+			from (
+				select 
+				max(id)+1 num
+				from shop_detail
+			)a
+	</select>
+	
+	<!-- max seq check -->
+	<select id="maxUserSeq" resultType="String">
+			select 
+			 LPAD(ifnull(a.num,1), '5' , '0') as resultNum
+			from (
+				select 
+				max(id)+1 num
+				from shop
+			)a
+	</select>
+	
+	<!-- 게시물 업로드 	-->
+	<insert id ="adminInsertPost">
+		insert into shop (
+			id, up_seq, title, content, email, reg_date, reg_user_id, imgYn, price, category, recommend
+		) value (
+			#{id},
+			#{up_seq},
+			#{title},
+			#{content},
+			'vjzm44&#64;naver.com',
+			#{reg_date},
+			'vjzm44admin',
+			'Y',
+			#{price},
+			'women',
+			'Y'
+		)
+	</insert>
+	
+	<!-- 게시물 이미지 업로드 	-->
+	<insert id ="adminInsertImg">
+		insert into shop_detail (
+			id, up_seq, img_cnt, img_url, division, reg_date
+		) value (
+			#{id},
+			#{up_seq},
+			#{img_cnt_v2},
+			#{img_url},
+			#{division},
+			#{reg_date}
+		)
+	</insert>
 
 </mapper>

@@ -14,6 +14,25 @@ import com.nemew.blog.admin.model.AdminModel;
 public interface AdminService {
 	
 	public String getDb2Dual() throws Exception;
+	
+	//메인테이블 최고 id값 구하기
+	public int maxIdNum();
+	
+	//메인테이블 최고 시퀀스 구하기
+	public String maxUserSeq();
+	
+	//디테일테이블 최고 id값 구하기
+	public int maxDetailId();
 
+	//게시물 업데이트
+	public boolean adminInsertPost(AdminModel vo) throws Exception;
+	
+	//게시물 이미지 업데이트
+	public boolean adminInsertImg(AdminModel vo) throws Exception;
+	
+	
+	
+	
+	
 	
 }

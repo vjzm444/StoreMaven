@@ -30,6 +30,7 @@ public class AdminModel {
 	
 	//Shop Detail 테이블
 	public String img_cnt;	//이미지 갯수
+	public int img_cnt_v2;	//이미지 갯수
 	public String img_url;	//이미지 url
 	public String division;	//대소분류 구분
 	
@@ -142,6 +143,12 @@ public class AdminModel {
 	}
 	public void setCnt(String cnt) {
 		this.cnt = cnt;
+	}
+	public int getImg_cnt_v2() {
+		return img_cnt_v2;
+	}
+	public void setImg_cnt_v2(int img_cnt_v2) {
+		this.img_cnt_v2 = img_cnt_v2;
 	}
 	
 	
